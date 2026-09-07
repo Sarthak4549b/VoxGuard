@@ -1,0 +1,15 @@
+# Python venv (recreate with requirements.txt)
+.venv/
+__pycache__/
+*.pyc
+
+# pip install logs
+pip_*.log
+
+# generated synthetic test audio (recreated by test_model.py)
+test_audio/
+
+# AASIST training artefacts we don't use
+aasist/LA/
+aasist/exp_result/
+aasist/models/__pycache__/

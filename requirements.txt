@@ -1,0 +1,16 @@
+# VoxGuard - FastAPI ML service (Part 2) requirements
+#
+# Reuses the same venv as ml/ (see ml/README.md) — torch is already installed
+# from the cu124 index there. If setting up fresh:
+#
+#   cd ml && python -m venv .venv && .venv\Scripts\activate
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu124
+#   cd .. && pip install -r ml/requirements.txt -r requirements.txt
+
+fastapi
+uvicorn[standard]
+python-multipart
+speechbrain
+faster-whisper
+imageio-ffmpeg
+truststore

@@ -1,0 +1,39 @@
+# VoxGuard - AASIST anti-spoofing ML module
+# Environment: Python 3.13, Windows 11, NVIDIA RTX 3050 Laptop (4 GB), driver 591.59
+#
+# ----------------------------------------------------------------------------
+# STEP 1 - install PyTorch from the CUDA wheel index (NOT PyPI):
+#
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu124
+#
+# Note: the originally requested cu121 index has NO Python 3.13 wheels
+# (it stops at torch 2.5.1 / cp312). cu124 is the nearest build and is fully
+# compatible with this GPU + driver. For a CPU-only box use:
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+#
+# STEP 2 - install the rest:
+#
+#   pip install -r requirements.txt
+# ----------------------------------------------------------------------------
+
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+# --- deep learning runtime ---
+torch==2.6.0+cu124
+torchaudio==2.6.0+cu124
+
+# --- audio I/O + DSP ---
+librosa==1.0.0
+numpy==2.5.2
+soundfile==0.14.0
+
+# --- transitive deps pinned for reproducibility (pulled in by librosa/soundfile) ---
+numba==0.67.0
+llvmlite==0.49.0
+scipy==1.18.1
+scikit-learn==1.9.0
+soxr==1.1.0
+cffi==2.1.1
+pooch==1.9.0
+joblib==1.6.0
+msgpack==1.2.2

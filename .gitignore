@@ -2,3 +2,10 @@ node_modules
 dist
 .env
 *.db
+
+# Python / ML service
+.venv/
+__pycache__/
+*.pyc
+pretrained_models/
+data/enrolled_speaker.npy
