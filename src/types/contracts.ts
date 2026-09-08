@@ -44,8 +44,16 @@ export interface ChunkAnalysis {
   /**
    * Session-level "sticky" risk. Once a chunk escalates to MEDIUM/HIGH the peak
    * is carried forward across later chunks (including silent ones) so a single
-   * fraud utterance is not overwritten by trailing silence. Decays one level
-   * only after 10 consecutive clean chunks with the speaker still MATCH.
+   * fraud utterance is not overwritten by trailing silence.
+   *
+   * ONLY fraud content (llm.detected_signals non-empty) can raise the session
+   * peak. Speaker MISMATCH and spoof_strong are too noisy on browser audio
+   * without reliable enrollment, so acoustic signals alone keep the session at
+   * LOW.
+   *
+   * Decay: a clean OR silent chunk (no fraud words spoken) advances the streak;
+   * after 5 consecutive such chunks an elevated session drops one level
+   * (HIGH -> MEDIUM -> LOW).
    */
   session_risk_score: number;
   session_risk_level: FusionResult['risk_level'];
