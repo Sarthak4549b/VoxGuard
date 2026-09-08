@@ -19,14 +19,25 @@ export async function callMLAnalyze(
       { audio_base64: audioBase64, transcript },
       { timeout: 8000 }
     );
+    console.log(
+      `[mlBridge] /analyze ok | risk_hint=${data.risk_hint} ` +
+        `spoof_strong=${data.spoof_strong} ` +
+        `transcript=${JSON.stringify(data.transcript ?? '')}`
+    );
     return data;
   } catch (err) {
     logger.error(err, 'callMLAnalyze failed - returning safe fallback');
+    console.log(
+      '[mlBridge] /analyze FAILED - returning safe fallback ' +
+        `(transcript falls back to client-supplied ${JSON.stringify(transcript)})`
+    );
     return {
       speaker_similarity: 0,
       speaker_status: 'UNKNOWN',
       spoof_score: 0.5,
       spoof_label: 'GENUINE',
+      spoof_strong: false,
+      risk_hint: 'NEUTRAL',
       transcript,
     };
   }

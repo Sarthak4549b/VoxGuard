@@ -23,7 +23,10 @@ from speechbrain.utils.fetching import LocalStrategy
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _STORAGE_DIR = os.path.join(_HERE, "data")
 _ENROLLED_PATH = os.path.join(_STORAGE_DIR, "enrolled_speaker.npy")
-_MATCH_THRESHOLD = 0.7
+# Lowered 0.70 -> 0.60: laptop-mic capture + browser WebM/Opus compression
+# pull a genuine enrolled speaker's similarity down enough that 0.70 caused
+# false MISMATCHes in the live demo.
+_MATCH_THRESHOLD = 0.6
 
 # ECAPA is small; keep it on CPU so it doesn't open a second CUDA context
 # alongside AASIST's (each CUDA context has real host-RAM overhead on top of
